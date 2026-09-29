@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NOVA | Moderní technologie</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #08090d;
+    color: white;
+    line-height: 1.6;
+}
+
+/* NAVBAR */
+
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 18px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(8, 9, 13, 0.8);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    z-index: 100;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.logo span {
+    color: #7c5cff;
+}
+
+nav ul {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+}
+
+nav a {
+    color: #bbb;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: white;
+}
+
+.nav-button {
+    background: #7c5cff;
+    color: white !important;
+    padding: 10px 18px;
+    border-radius: 8px;
+}
+
+/* HERO */
+
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 20px 80px;
+
+    background:
+        radial-gradient(circle at 50% 20%, rgba(124,92,255,0.25), transparent 35%),
+        #08090d;
+}
+
+.hero-content {
+    max-width: 850px;
+}
+
+.badge {
+    display: inline-block;
+    padding: 8px 15px;
+    border: 1px solid rgba(124,92,255,0.5);
+    border-radius: 50px;
+    color: #b9aaff;
+    margin-bottom: 25px;
+    background: rgba(124,92,255,0.08);
+}
+
+.hero h1 {
+    font-size: clamp(45px, 8vw, 85px);
+    line-height: 1;
+    margin-bottom: 25px;
+}
+
+.gradient {
+    background: linear-gradient(90deg, #7c5cff, #c29cff);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.hero p {
+    color: #999;
+    font-size: 20px;
+    max-width: 650px;
+    margin: auto;
+}
+
+.buttons {
+    margin-top: 35px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 14px 25px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-primary {
+    background: #7c5cff;
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(124,92,255,0.35);
+}
+
+.btn-secondary {
+    border: 1px solid #333;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #17181f;
+}
+
+/* GENERAL */
+
+section {
+    padding: 100px 7%;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 55px;
+}
+
+.section-title h2 {
+    font-size: 42px;
+    margin-bottom: 10px;
+}
+
+.section-title p {
+    color: #888;
+}
+
+/* STATS */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+.stat {
+    text-align: center;
+    padding: 30px;
+    background: #111218;
+    border: 1px solid #20212a;
+    border-radius: 15px;
+}
+
+.stat h3 {
+    font-size: 35px;
+    color: #a28cff;
+}
+
+.stat p {
+    color: #777;
+}
+
+/* FEATURES */
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.card {
+    padding: 30px;
+    background: linear-gradient(145deg, #12131a, #0d0e13);
+    border: 1px solid #22232c;
+    border-radius: 18px;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    border-color: #6750d8;
+}
+
+.icon {
+    width: 50px;
+    height: 50px;
+    display: grid;
+    place-items: center;
+    background: rgba(124,92,255,0.15);
+    border-radius: 12px;
+    font-size: 23px;
+    margin-bottom: 20px;
+}
+
+.card h3 {
+    margin-bottom: 10px;
+}
+
+.card p {
+    color: #888;
+}
+
+/* PRICING */
+
+.pricing {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    max-width: 1050px;
+    margin: auto;
+}
+
+.price-card {
+    padding: 35px;
+    border: 1px solid #252631;
+    background: #111218;
+    border-radius: 18px;
+}
+
+.price-card.featured {
+    border: 2px solid #7c5cff;
+    transform: scale(1.03);
+}
+
+.price-card h3 {
+    font-size: 22px;
+}
+
+.price {
+    font-size: 42px;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+.price span {
+    font-size: 15px;
+    color: #777;
+}
+
+.price-card ul {
+    list-style: none;
+    margin: 25px 0;
+}
+
+.price-card li {
+    margin: 12px 0;
+    color: #aaa;
+}
+
+/* FAQ */
+
+.faq {
+    max-width: 800px;
+    margin: auto;
+}
+
+.question {
+    background: #111218;
+    margin-bottom: 12px;
+    border: 1px solid #24252e;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.question button {
+    width: 100%;
+    padding: 20px;
+    background: none;
+    color: white;
+    border: none;
+    text-align: left;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+.answer {
+    display: none;
+    padding: 0 20px 20px;
+    color: #888;
+}
+
+/* CONTACT */
+
+.contact-box {
+    max-width: 650px;
+    margin: auto;
+    background: #111218;
+    padding: 35px;
+    border-radius: 18px;
+    border: 1px solid #24252e;
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 15px;
+    background: #08090d;
+    border: 1px solid #292a34;
+    color: white;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+textarea {
+    height: 130px;
+    resize: vertical;
+}
+
+form button {
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* FOOTER */
+
+footer {
+    text-align: center;
+    padding: 35px;
+    border-top: 1px solid #20212a;
+    color: #666;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 850px) {
+
+    nav ul {
+        display: none;
+    }
+
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .features {
+        grid-template-columns: 1fr;
+    }
+
+    .pricing {
+        grid-template-columns: 1fr;
+    }
+
+    .price-card.featured {
+        transform: none;
+    }
+}
+
+@media (max-width: 500px) {
+
+    section {
+        padding: 70px 5%;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .hero p {
+        font-size: 17px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVIGACE -->
+
+<nav>
+    <div class="logo">NO<span>VA</span></div>
+
+    <ul>
+        <li><a href="#funkce">Funkce</a></li>
+        <li><a href="#cenik">Ceník</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#kontakt" class="nav-button">Kontakt</a></li>
+    </ul>
+</nav>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="badge">
+            🚀 Technologie nové generace
+        </div>
+
+        <h1>
+            Budoucnost začíná
+            <span class="gradient">dnes.</span>
+        </h1>
+
+        <p>
+            NOVA pomáhá týmům vytvářet rychlejší,
+            chytřejší a modernější digitální produkty.
+        </p>
+
+        <div class="buttons">
+            <a href="#funkce" class="btn btn-primary">
+                Prozkoumat NOVA
+            </a>
+
+            <a href="#kontakt" class="btn btn-secondary">
+                Kontaktovat nás
+            </a>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- STATISTIKY -->
+
+<section>
+
+    <div class="stats">
+
+        <div class="stat">
+            <h3>10K+</h3>
+            <p>Uživatelů</p>
+        </div>
+
+        <div class="stat">
+            <h3>99.9%</h3>
+            <p>Dostupnost</p>
+        </div>
+
+        <div class="stat">
+            <h3>24/7</h3>
+            <p>Podpora</p>
+        </div>
+
+        <div class="stat">
+            <h3>120+</h3>
+            <p>Zemí</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FUNKCE -->
+
+<section id="funkce">
+
+    <div class="section-title">
+
+        <h2>Co NOVA umí?</h2>
+
+        <p>
+            Nástroje navržené tak, aby práce nebyla utrpením.
+        </p>
+
+    </div>
+
+    <div class="features">
+
+        <div class="card">
+            <div class="icon">⚡</div>
+            <h3>Rychlost</h3>
+            <p>
+                Optimalizovaný systém pro rychlou práci
+                bez zbytečného čekání.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="icon">🔒</div>
+            <h3>Bezpečnost</h3>
+            <p>
+                Moderní ochrana dat a bezpečnostní technologie
+                pro vaše projekty.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="icon">🤖</div>
+            <h3>Automatizace</h3>
+            <p>
+                Automatizujte opakující se úkoly a
+                soustřeďte se na důležitější věci.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="icon">📊</div>
+            <h3>Analytika</h3>
+            <p>
+                Přehledné statistiky a data v reálném čase.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="icon">🌎</div>
+            <h3>Globální dostupnost</h3>
+            <p>
+                Vaše projekty dostupné odkudkoliv
+                a kdykoliv.
+            </p>
+        </div>
+
+        <div class="card">
+            <div class="icon">🎨</div>
+            <h3>Moderní design</h3>
+            <p>
+                Čisté rozhraní vytvořené pro jednoduché
+                a příjemné používání.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CENÍK -->
+
+<section id="cenik">
+
+    <div class="section-title">
+
+        <h2>Jednoduchý ceník</h2>
+
+        <p>
+            Vyberte plán podle velikosti projektu.
+        </p>
+
+    </div>
+
+    <div class="pricing">
+
+        <div class="price-card">
+
+            <h3>Starter</h3>
+
+            <div class="price">
+                0 Kč
+                <span>/ měsíc</span>
+            </div>
+
+            <ul>
+                <li>✓ 1 projekt</li>
+                <li>✓ Základní funkce</li>
+                <li>✓ 1 GB úložiště</li>
+                <li>✓ Komunitní podpora</li>
+            </ul>
+
+            <a href="#kontakt" class="btn btn-secondary">
+                Začít zdarma
+            </a>
+
+        </div>
+
+
+        <div class="price-card featured">
+
+            <h3>Pro</h3>
+
+            <div class="price">
+                299 Kč
+                <span>/ měsíc</span>
+            </div>
+
+            <ul>
+                <li>✓ 10 projektů</li>
+                <li>✓ Pokročilé funkce</li>
+                <li>✓ 100 GB úložiště</li>
+                <li>✓ Prioritní podpora</li>
+            </ul>
+
+            <a href="#kontakt" class="btn btn-primary">
+                Vyzkoušet Pro
+            </a>
+
+        </div>
+
+
+        <div class="price-card">
+
+            <h3>Enterprise</h3>
+
+            <div class="price">
+                Kontakt
+            </div>
+
+            <ul>
+                <li>✓ Neomezené projekty</li>
+                <li>✓ Vlastní řešení</li>
+                <li>✓ Neomezené úložiště</li>
+                <li>✓ 24/7 podpora</li>
+            </ul>
+
+            <a href="#kontakt" class="btn btn-secondary">
+                Kontaktovat
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FAQ -->
+
+<section id="faq">
+
+    <div class="section-title">
+
+        <h2>Časté otázky</h2>
+
+        <p>
+            Protože se někdo určitě zeptá.
+        </p>
+
+    </div>
+
+    <div class="faq">
+
+        <div class="question">
+
+            <button onclick="toggleFAQ(this)">
+                Co je NOVA?
+            </button>
+
+            <div class="answer">
+                NOVA je moderní digitální platforma
+                zaměřená na produktivitu a automatizaci.
+            </div>
+
+        </div>
+
+
+        <div class="question">
+
+            <button onclick="toggleFAQ(this)">
+                Je NOVA zdarma?
+            </button>
+
+            <div class="answer">
+                Ano. Základní verze je zdarma.
+                Pokročilé funkce jsou dostupné v placených plánech.
+            </div>
+
+        </div>
+
+
+        <div class="question">
+
+            <button onclick="toggleFAQ(this)">
+                Funguje NOVA na mobilu?
+            </button>
+
+            <div class="answer">
+                Ano. Web je responzivní a funguje
+                na telefonech, tabletech i počítačích.
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- KONTAKT -->
+
+<section id="kontakt">
+
+    <div class="section-title">
+
+        <h2>Napište nám</h2>
+
+        <p>
+            Máte otázku? Formulář je zatím jen demo,
+            ale vypadá důležitě. To se počítá.
+        </p>
+
+    </div>
+
+    <div class="contact-box">
+
+        <form onsubmit="sendMessage(event)">
+
+            <input
+                type="text"
+                placeholder="Vaše jméno"
+                required
+            >
+
+            <input
+                type="email"
+                placeholder="Váš e-mail"
+                required
+            >
+
+            <textarea
+                placeholder="Vaše zpráva..."
+                required
+            ></textarea>
+
+            <button class="btn btn-primary">
+                Odeslat zprávu 🚀
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    © 2026 NOVA Technologies
+    <br>
+    Vytvořeno s HTML, CSS a JavaScriptem.
+
+</footer>
+
+
+<script>
+
+function toggleFAQ(button) {
+
+    const answer = button.nextElementSibling;
+
+    if (answer.style.display === "block") {
+        answer.style.display = "none";
+    } else {
+        answer.style.display = "block";
+    }
+
+}
+
+
+function sendMessage(event) {
+
+    event.preventDefault();
+
+    alert(
+        "Děkujeme za zprávu! 🚀\n\n" +
+        "Tento formulář je zatím pouze ukázkový."
+    );
+
+}
+
+</script>
+
+</body>
+</html>
